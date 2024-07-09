@@ -1,17 +1,14 @@
 :root {
-  --primary-color: #181846;
-  --secondary-color: #FF5722;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  --ghost: #C4C5D7;
+  --primary: #181846;
+  --secondary: #FF5722;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
-

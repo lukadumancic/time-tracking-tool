@@ -4,6 +4,8 @@ import { PrimeReactProvider } from "primereact/api";
 import Navigation from "@/components/Navigation";
 
 import "./globals.css";
+import "./theme.css";
+import 'primeicons/primeicons.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
