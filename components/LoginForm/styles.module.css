@@ -1,0 +1,47 @@
+.card {
+  text-align: center;
+  background: var(--white-liliac);
+  border: 0.5px solid var(--whisper);
+  border-radius: 10px;
+  padding: 2rem;
+  width: 400px;
+  padding: 44px 35px 60px 35px;
+  border-radius: 10px;
+
+  &.small {
+    height: 92px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    padding-top: 14px;
+    overflow: hidden;
+  }
+}
+
+.loginBtn {
+  margin-top: 50px;
+  width: 100%;
+  background-color: var(--secondary);
+  color: white;
+}
+
+.infoCardWrapper {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 34px;
+  text-align: left;
+}
+
+.infoCardWrapperText {
+  color: var(--lynch);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.infoCardWrapperLink {
+    color: var(--secondary);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  
