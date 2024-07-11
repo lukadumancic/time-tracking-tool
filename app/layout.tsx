@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
-import { PrimeReactProvider } from "primereact/api";
 import Navigation from "@/components/Navigation";
 
+import Providers from "./providers";
 import "./globals.css";
-import "./theme.css";
-import 'primeicons/primeicons.css';
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -20,13 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <PrimeReactProvider>
+    <Providers>
       <html lang="en">
         <body className={nunito.className}>
           <Navigation />
           {children}
         </body>
       </html>
-    </PrimeReactProvider>
+    </Providers>
   );
 }

@@ -6,6 +6,8 @@ import { Button } from "primereact/button";
 import cn from "classnames";
 
 import styles from "./styles.module.css";
+import { useAppSelector } from "@/store/hooks";
+import { userSelector } from "@/store/selectors";
 
 const navigationRoutes = ["Trackers", "History", "Logout"];
 
@@ -38,20 +40,24 @@ const NavButton = (props: {
 const Navigation = () => {
   const pathname = usePathname();
 
+  const userData = useAppSelector(userSelector);
+
   return (
     <div className={styles.container}>
       <Image src="/logo.svg" alt="logo" width={315} height={44} />
-      <div className={styles.btnGroup}>
-        {navigationRoutes.map((route, index) => (
-          <NavButton
-            key={route}
-            url={`/${route.toLowerCase()}`}
-            text={route}
-            active={pathname.includes(route.toLowerCase())}
-            hideActive={navigationRoutes.length - 1 === index}
-          />
-        ))}
-      </div>
+      {userData.user && (
+        <div className={styles.btnGroup}>
+          {navigationRoutes.map((route, index) => (
+            <NavButton
+              key={route}
+              url={`/${route.toLowerCase()}`}
+              text={route}
+              active={pathname.includes(route.toLowerCase())}
+              hideActive={navigationRoutes.length - 1 === index}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
