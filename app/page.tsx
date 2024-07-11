@@ -1,9 +1,9 @@
 "use client";
 import LoginForm from "@/components/LoginForm";
 
-export default function Home() {
+export default function Login() {
   return (
-    <div className="page">
+    <div className="page" style={{ alignItems: "center" }}>
       <LoginForm />
     </div>
   );
