@@ -3,14 +3,19 @@ import {
   configureStore,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
-import userSlice from "./slices/userSlices";
+import userSlice from "./slices/userSlice";
+import trackerSlice from "./slices/trackerSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: combineReducers({
       user: userSlice.reducer,
+      trackers: trackerSlice.reducer,
     }),
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
   });
 };
 

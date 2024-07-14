@@ -1,16 +1,24 @@
 import { createAppAsyncThunk } from "..";
 import actionNameCreator from "../actionNameCreator";
 import { auth, logout, signIn } from "../firebase";
-import { setErrorMessage, setIsLoading, setUser } from "../slices/userSlices";
+import { setErrorMessage, setIsLoading, setUser } from "../slices/userSlice";
 
 const anc = actionNameCreator("user");
+
+const firebaseUserToUser = (firebaseUser: any) => {
+  return {
+    id: firebaseUser.uid,
+    email: firebaseUser.email,
+    displayName: firebaseUser.displayName,
+  };
+};
 
 export const setupUserTriggers = createAppAsyncThunk(
   anc("setupUserTriggers"),
   async (_params, { dispatch }) => {
     auth.onAuthStateChanged((userData) => {
       if (userData) {
-        dispatch(setUser(userData));
+        dispatch(setUser(firebaseUserToUser(userData)));
       } else {
         dispatch(setUser(null));
       }
@@ -28,7 +36,7 @@ export const loginUser = createAppAsyncThunk(
     dispatch(setIsLoading(true));
     try {
       const userData = await signIn(email, password);
-      dispatch(setUser(userData!.user));
+      dispatch(setUser(firebaseUserToUser(userData!.user)));
     } catch (e: any) {
       dispatch(setErrorMessage(e.message));
     }

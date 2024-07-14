@@ -5,3 +5,8 @@ export const userSelector = createSelector(
   [getStore],
   (s) => s.user
 );
+
+export const trackerSelector = createSelector(
+  [getStore],
+  (s) => s.trackers
+);

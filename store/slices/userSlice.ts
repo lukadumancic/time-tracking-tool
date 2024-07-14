@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserCredential } from "@firebase/auth";
 
+interface User {
+  id: string;
+  email: string | null;
+  displayName: string | null;
+}
 
 const initialUserState: {
-  user: UserCredential["user"] | null;
+  user: User | null;
   errorMessage: string | null;
   isLoading: boolean;
 } = {
@@ -19,7 +23,10 @@ const userSlice = createSlice({
     setIsLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
-    setUser(state, action: PayloadAction<UserCredential["user"] | null>) {
+    setUser(state, action: PayloadAction<User | null>) {
+      if (state.user && state.user.id === action.payload?.id) {
+        return;
+      }
       state.user = action.payload;
     },
     setErrorMessage(state, action: PayloadAction<string | null>) {

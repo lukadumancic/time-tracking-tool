@@ -9,7 +9,9 @@ const useOnAppInit = () => {
   const router = useRouter();
   const userData = useAppSelector(userSelector);
 
-  dispatch(setupUserTriggers());
+  useEffect(() => {
+    dispatch(setupUserTriggers());
+  }, []);
 
   useEffect(() => {
     if (userData.user) {
