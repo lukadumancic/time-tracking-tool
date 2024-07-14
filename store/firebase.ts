@@ -18,17 +18,24 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import isBackend from "@/helpers/isBackend";
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 export const signIn = async (email: string, password: string) => {
+  if (isBackend()) {
+    return;
+  }
   const userCredential = await signInWithEmailAndPassword(
     auth,
     email,
     password
   );
   return userCredential;
+};
+
+export const logout = async () => {
+  await auth.signOut();
 };

@@ -10,7 +10,7 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { loginUser } from "@/store/slices/userSlices";
+import { loginUser } from "@/store/asyncActions/userActions";
 import { userSelector } from "@/store/selectors";
 
 const LoginForm = () => {

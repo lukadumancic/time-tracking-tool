@@ -5,25 +5,33 @@ import { usePathname } from "next/navigation";
 import { Button } from "primereact/button";
 import cn from "classnames";
 
-import styles from "./styles.module.css";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { userSelector } from "@/store/selectors";
+import { logoutUser } from "@/store/asyncActions/userActions";
 
-const navigationRoutes = ["Trackers", "History", "Logout"];
+import styles from "./styles.module.css";
+
+const navigationRoutes = ["Trackers", "History"];
 
 const NavButton = (props: {
   url: string;
   text: string;
   active?: boolean;
-  hideActive?: boolean;
+  onClick?: () => void;
 }) => {
-  const { url, text, active, hideActive } = props;
+  const { url, text, active, onClick } = props;
   return (
     <Link
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       href={url}
       className={cn(styles.btnWrapper, {
         [styles.active]: active,
-        [styles.noBorder]: hideActive,
+        [styles.noBorder]: !!onClick,
       })}
     >
       <Button
@@ -39,8 +47,13 @@ const NavButton = (props: {
 
 const Navigation = () => {
   const pathname = usePathname();
+  const dispatch = useAppDispatch();
 
   const userData = useAppSelector(userSelector);
+
+  const logout = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <div className={styles.container}>
@@ -53,9 +66,9 @@ const Navigation = () => {
               url={`/${route.toLowerCase()}`}
               text={route}
               active={pathname.includes(route.toLowerCase())}
-              hideActive={navigationRoutes.length - 1 === index}
             />
           ))}
+          <NavButton url="/logout" text="Logout" onClick={logout} />
         </div>
       )}
     </div>
