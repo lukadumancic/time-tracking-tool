@@ -158,7 +158,7 @@ const DataTable = ({ filter }: { filter?: boolean }) => {
     );
   };
 
-  const timeLoggedTemplate = (rowData: any) => {
+  const TimeLoggedTemplate = (rowData: any) => {
     const timeLogged = useTimer(
       rowData.isRunning,
       rowData.startTime,
@@ -233,7 +233,7 @@ const DataTable = ({ filter }: { filter?: boolean }) => {
         <Column
           field="timeLogged"
           header="Time Logged"
-          body={timeLoggedTemplate}
+          body={TimeLoggedTemplate}
         />
         <Column field="description" header="Description" />
         <Column header="Actions" body={actionTemplate} />
